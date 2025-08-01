@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔨 超级打地鼠游戏 🐹</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .game-title {
+            color: #fff;
+            font-size: 3em;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .game-info {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 20px;
+            color: #fff;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .info-item {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+        
+        #gameCanvas {
+            border: 5px solid #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            cursor: none;
+            background: #8B4513;
+        }
+        
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .game-over {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 1.5em;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="game-title">🔨 超级打地鼠游戏 🐹</h1>
+    
+    <div class="game-info">
+        <div class="info-item">得分: <span id="score">0</span></div>
+        <div class="info-item">时间: <span id="time">60</span>s</div>
+        <div class="info-item">连击: <span id="combo">0</span></div>
+    </div>
+    
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    
+    <div class="controls">
+        <button onclick="startGame()">🎮 开始游戏</button>
+        <button onclick="pauseGame()">⏸️ 暂停</button>
+        <button onclick="resetGame()">🔄 重新开始</button>
+    </div>
+    
+    <div id="gameOver" class="game-over">
+        <h2>🎉 游戏结束！</h2>
+        <p>最终得分: <span id="finalScore">0</span></p>
+        <p>最高连击: <span id="maxCombo">0</span></p>
+        <button onclick="resetGame(); document.getElementById('gameOver').style.display='none'">再来一局</button>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
